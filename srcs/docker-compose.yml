@@ -39,6 +39,8 @@ services:
       - mariadb
     volumes:
       - wp_data:/var/www/html
+    networks:
+      - inception_network
   
   nginx:
     build:
@@ -60,14 +62,14 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/alehnri/data/mysql
+      device: /home/alehenri/data/mysql
   
   wp_data:
     driver: local
     driver_opts:
       type: none
       o: bind # 'o' stands for options, it's a mount option passed to the Linux kernel when Docker creates the bind mount
-      device: /home/alehneri/data/wordpress
+      device: /home/alehenri/data/wordpress
 
 networks:
   inception_netwok:
