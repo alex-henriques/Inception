@@ -27,12 +27,12 @@ RUN addgroup -g 82 -S www-data && adduser -u 82 -D -S -G www-data www-data 2>/de
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp && chmod +x /usr/local/bin/wp
 
 # php-fpm pool config.: replace the default config with mine because mine listens to TCP 9000 and the default one doesn't
-COPY    conf/www.conf /etc/php81/php-fpm.d/www.conf
+COPY conf/www.conf /etc/php81/php-fpm.d/www.conf
 
 # WP file location
 RUN mkdir -p /var/www/html && chown -R www-data:www-data /var/www/html
 COPY    tools/setup_wordpress.sh /usr/local/bin/setup_wordpress.sh
-RUN chmod +x /user/local/bin/setup_wordpress.sh
+RUN chmod +x /usr/local/bin/setup_wordpress.sh
 
 # php-fpm listens on port 9000, NGINX connects to it on the same port
 EXPOSE  9000
