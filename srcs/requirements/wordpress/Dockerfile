@@ -32,7 +32,7 @@ COPY    conf/www.conf /etc/php81/php-fpm.d/www.conf
 # WP file location
 RUN mkdir -p /var/www/html && chown -R www-data:www-data /var/www/html
 COPY    tools/setup_wordpress.sh /usr/local/bin/setup_wordpress.sh
-RUN chmod +x /user/local/bin/setup_wordpress.ships
+RUN chmod +x /user/local/bin/setup_wordpress.sh
 
 # php-fpm listens on port 9000, NGINX connects to it on the same port
 EXPOSE  9000

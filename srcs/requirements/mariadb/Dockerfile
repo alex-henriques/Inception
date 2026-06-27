@@ -11,7 +11,7 @@ RUN apk update && apk add --no-cache mariadb mariadb-client
 #chown both to the mysql user so the process can be written there
 #the mysql yser is created automatically when mariadb is installed
 
-RUN mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld && chown -R mysql:mysql /var/lib/mysql
+RUN mkdir -p /run/mysqld /var/lib/mysql && chown -R mysql:mysql /run/mysqld && chown -R mysql:mysql /var/lib/mysql
 
 # configuration: copy my.cnf into the directory MariaDB reads on startup
 
