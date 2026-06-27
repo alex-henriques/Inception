@@ -47,7 +47,7 @@ services:
       context: requirements/nginx
       dockerfile: Dockerfile
     image: nginx
-    retstart: unless-stopped
+    restart: unless-stopped
     ports: # the only port exposed to the outside world
       - "443:443" # map port on the HOST to port 443 in the container
     depends_on: 
