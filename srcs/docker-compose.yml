@@ -74,7 +74,7 @@ volumes:
 
 networks:
   inception_network:
-  driver: bridge
+    driver: bridge
 
 secrets:
   db_pass:
