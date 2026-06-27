@@ -55,7 +55,7 @@ services:
     volumes: # shared volume with WP
       - wp_data:/var/www/html
     networks:
-      - inception_network\
+      - inception_network
 
 volumes:
   db_data:
