@@ -4,14 +4,14 @@ FROM alpine:3.19
 
 #installing packages; mariadb(database); mariadb-client(msqladmin and mysql CLI tools, used in setup), combined into one run to keep the layer count low
 
-RUN apk update && apk add --no-cache \ mariadb \ mariadb-client
+RUN apk update && apk add --no-cache mariadb mariadb-client
 
 #/run/mysql -> unix socket file lives
 #/var/lib/mysql -> data directory (volume)
 #chown both to the mysql user so the process can be written there
 #the mysql yser is created automatically when mariadb is installed
 
-RUN mkdir -p /run/mysqld && \ chown -R mysql:mysql /run/mysqld && \ chown -R mysql:mysql /var/lib/mysql
+RUN mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld && chown -R mysql:mysql /var/lib/mysql
 
 # configuration: copy my.cnf into the directory MariaDB reads on startup
 
