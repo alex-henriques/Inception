@@ -50,7 +50,8 @@ services:
     retstart: unless-stopped
     ports: # the only port exposed to the outside world
       - "443:443" # map port on the HOST to port 443 in the container
-    depends_on: wordpress
+    depends_on: 
+      - wordpress
     volumes: # shared volume with WP
       - wp_data:/var/www/html
     networks:
