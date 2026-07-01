@@ -1,7 +1,5 @@
-# !/bin/sh
-
+#!/bin/sh
 set -e
-
 
 #Reading secrets, passwords are stored in files, not env files. read them here so they never appear in the image layers or docker inspect output
 
@@ -16,7 +14,7 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
     mysql_install_db --user=mysql --datadir=/var/lib/mysql > /dev/null
 
     #start a temp MariaDB locally in order to run setup SQL
-    mysql --user=mysql --skip-networking & TEMP_PID=$!
+    mysqld --user=mysql --skip-networking & TEMP_PID=$!
 
     #wait until the socket is ready
     until mysqladmin ping --socket=/run/mysqld/mysqld.sock --silent; do sleep 1
@@ -26,13 +24,13 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
     #database
     mysql --socket=/run/mysqld/mysqld.sock << EOF
 
-CREATE DATABASE IF NOT EXISTS \ `&{MYSQL_DATABASE}\`;
+CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;
 CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${DB_PASS}';
-GRANT ALL PREVILEGES ON \ `${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'%';
-ALTER USER 'root'@'localhost' IDENTIFED BY '${DB_ROOT_PASS}';
+GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'%';
+ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASS}';
 DELETE FROM mysql.user WHERE User='';
 DROP DATABASE IF EXISTS test;
-FLUSH PREVILEGES;
+FLUSH PRIVILEGES;
 EOF
 
     #stop the temp instance

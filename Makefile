@@ -13,7 +13,7 @@ down:
 
 clean: down
 	@docker compose -f $(COMPOSE_FILE) down -v
-	@sudo rm -f $(DATA_DIR)/mysql
+	@sudo rm -rf $(DATA_DIR)/mysql
 	@sudo rm -rf $(DATA_DIR)/wordpress
 
 fclean: clean

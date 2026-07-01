@@ -35,6 +35,7 @@ services:
     secrets:
       - db_pass
       - db_root_pass
+      - credentials
     depends_on: #tells compose to start mariadb before wordpress. this only controls start order
       - mariadb
     volumes:
@@ -81,3 +82,5 @@ secrets:
     file: ../secrets/db_pass.txt
   db_root_pass:
     file: ../secrets/db_root_pass.txt
+  credentials:
+    file: ../secrets/credentials.txt
