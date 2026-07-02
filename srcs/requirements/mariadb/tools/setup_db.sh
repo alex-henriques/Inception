@@ -1,12 +1,8 @@
 #!/bin/sh
 set	-e
 
-#Reading secrets, passwords are stored in files, not env files. read them here so they never appear in the image layers or docker inspect output
-
 DB_PASS=$(cat /run/secrets/db_pass)
 DB_ROOT_PASS=$(cat /run/secrets/db_root_pass)
-
-# First run detection. /var/lib/mysql is the volume. 
 
 if [ ! -d "/var/lib/mysql/mysql" ]; then
 
@@ -38,5 +34,5 @@ EOF
 	wait $TEMP_PID
 fi
 
-#exec and PID1; exec replaces his shell process with mysql, ie, mysql becomes PID1 
+#exec and PID1; exec replaces shell process with mysql, ie, mysql becomes PID1 
 exec mysqld --user=mysql

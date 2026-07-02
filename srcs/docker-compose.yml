@@ -1,20 +1,19 @@
-# Each service = 1 container. The service name becomes the DNS hostname that other containers use to find it on the Docker network
 services:
   mariadb:
     build:
-      context: requirements/mariadb #where Docker looks for the Dockerfile
-      dockerfile: Dockerfile #which Dockerfile to use.
-    image: mariadb #the image must be the service name
-    restart: unless-stopped # restarts automatically if the container crashes, but not if manually stop it with docker compose down
-    environment: # environment variables from .env
+      context: requirements/mariadb
+      dockerfile: Dockerfile
+    image: mariadb
+    restart: unless-stopped
+    environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
-    secrets: # the file content comes from secrets
+    secrets:
       - db_pass
       - db_root_pass
     volumes: 
       - db_data:/var/lib/mysql
-    networks: # all 3 containers must be on the same network
+    networks:
       - inception_network
   
   wordpress:
@@ -49,11 +48,11 @@ services:
       dockerfile: Dockerfile
     image: nginx
     restart: unless-stopped
-    ports: # the only port exposed to the outside world
-      - "443:443" # map port on the HOST to port 443 in the container
+    ports:
+      - "443:443"
     depends_on: 
       - wordpress
-    volumes: # shared volume with WP
+    volumes:
       - wp_data:/var/www/html
     networks:
       - inception_network
