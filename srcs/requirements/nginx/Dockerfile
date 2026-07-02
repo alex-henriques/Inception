@@ -20,4 +20,4 @@ RUN	mkdir -p /var/www/html
 EXPOSE	443
 
 # running nginx in foreground: nginx -g "daemon off" tells nginx not to daemonize (fork itself into the background); needed otherwise it would exit PID 1 and container would stop
-CMD ["nginx", "-g", "daemon off;"]
+CMD	["nginx", "-g", "daemon off;"]

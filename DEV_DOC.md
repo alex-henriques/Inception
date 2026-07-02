@@ -29,7 +29,7 @@ echo "<root_db_password>" > secrets/db_root_pass.txt
 echo "<admin_password>" > secrets/credentials.txt
 ```
 
-### 3. Create srcs/.env (manually, not git)
+### 3. Create srcs/.env (manually, not in git)
 
 ```bash
 cat > srcs/.env << 'ENVEOF'

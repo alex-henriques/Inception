@@ -1,5 +1,5 @@
 #!/bin/sh
-set -e
+set	-e
 
 #Reading secrets, passwords are stored in files, not env files. read them here so they never appear in the image layers or docker inspect output
 
@@ -10,19 +10,19 @@ DB_ROOT_PASS=$(cat /run/secrets/db_root_pass)
 
 if [ ! -d "/var/lib/mysql/mysql" ]; then
 
-    #inlitialise the data directory
-    mysql_install_db --user=mysql --datadir=/var/lib/mysql > /dev/null
+	#inlitialise the data directory
+	mysql_install_db --user=mysql --datadir=/var/lib/mysql > /dev/null
 
-    #start a temp MariaDB locally in order to run setup SQL
-    mysqld --user=mysql --skip-networking & TEMP_PID=$!
+	#start a temp MariaDB locally in order to run setup SQL
+	mysqld --user=mysql --skip-networking & TEMP_PID=$!
 
-    #wait until the socket is ready
-    until mysqladmin ping --socket=/run/mysqld/mysqld.sock --silent; do sleep 1
-    done
+	#wait until the socket is ready
+	until mysqladmin ping --socket=/run/mysqld/mysqld.sock --silent; do sleep 1
+	done
 
-    #SQL setup, SETUP commands are to create WORDPRESS DB, user with pass; grant user all rights on the DB only; set root pass; remove anonymous users and test
-    #database
-    mysql --socket=/run/mysqld/mysqld.sock << EOF
+	#SQL setup, SETUP commands are to create WORDPRESS DB, user with pass; grant user all rights on the DB only; set root pass; remove anonymous users and test
+	#database
+	mysql --socket=/run/mysqld/mysqld.sock << EOF
 
 CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;
 CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${DB_PASS}';
@@ -33,9 +33,9 @@ DROP DATABASE IF EXISTS test;
 FLUSH PRIVILEGES;
 EOF
 
-    #stop the temp instance
-    kill $TEMP_PID
-    wait $TEMP_PID
+	#stop the temp instance
+	kill $TEMP_PID
+	wait $TEMP_PID
 fi
 
 #exec and PID1; exec replaces his shell process with mysql, ie, mysql becomes PID1 

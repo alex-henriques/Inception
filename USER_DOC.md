@@ -13,7 +13,7 @@ This infraestructure runs a Wordpress website accessible at 'https://alehenri.42
 make
 ```
 After doing 'make' we wait about 30 seconds for all containers to initialise, then we visit: https://alehenri.42.fr.
-The browser will give off a wanring about an untrusted certificate and that's expected because a self-signed certificate was used, ie, it's not signed by CA (Certificate Authority).
+The browser will give off a warning about an untrusted certificate and that's expected because a self-signed certificate was used, ie, it's not signed by CA (Certificate Authority).
 
 ## Stopping the project
 

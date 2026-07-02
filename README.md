@@ -17,19 +17,19 @@ Each service runs in its own dedicated container built from Alpine 3.19. All ima
 
 A VM emulates an entire computer including its own Kernel, hardware drivers, and Operating System. It's fully isolated but heavy, slow to boot, high memory usage and large disk footprint. While Docker Containers share the host Kernel, they're isolated processes, Linux namespaces give each container its own filesystem, network, and PID space, while cgroups limit resource usage. Containers start in milliseconds and use a fraction of the resources a VM needs.
 
-### Secrets & Environment Variables
+### Secrets vs Environment Variables
 
 Docker secrets are mounted as files at 'run/secrets<name>' inside containers at runtime. They never appear in image layers or 'docker inspect' output. Passwords and other sensitive information belong in secrets.
 
 Environment Variables, stored in '.env', are suitable for non sensitive configuration like database names, domain names, and usernames. They're visible in 'docker inspect' output and image layers.
 
-### Docker Network & Host Network
+### Docker Network vs Host Network
 
 Docker bridge networking gives each container its own network namespace. Containers communicate by service name via Docker's built in DNS. Only explicitly published ports are accessible from outside.
 
 Host networking makes the container share the host machine's network stack directly. There's no network isolation. Forbidden in this project's subject.
 
-### Docker Volumes & Bind Mounts
+### Docker Volumes vs Bind Mounts
 
 Docker Volumes are managed by Docker. In this project I use named volumes configured with 'driver_opts' to point to '/home/alehenri/data/' on the host.
 
