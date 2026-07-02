@@ -10,10 +10,10 @@ all:
 	@docker compose -p $(PROJECT_NAME) -f $(COMPOSE_FILE) up -d --build
 
 down:
-	@docker compose -f $(COMPOSE_FILE) down
+	@docker compose -p $(PROJECT_NAME) -f $(COMPOSE_FILE) down
 
 clean: down
-	@docker compose -f $(COMPOSE_FILE) down -v
+	@docker compose -p $(PROJECT_NAME) -f $(COMPOSE_FILE) down -v
 	@sudo rm -rf $(DATA_DIR)/mysql
 	@sudo rm -rf $(DATA_DIR)/wordpress
 
@@ -23,4 +23,4 @@ fclean: clean
 re: fclean all
 
 logs:
-	@docker compose -f $(COMPOSE_FILE) logs -f
+	@docker compose -p $(PROJECT_NAME) -f $(COMPOSE_FILE) logs -f
