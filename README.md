@@ -45,13 +45,15 @@ Bind Mounts map a specific host directory path into a container; simple but less
 
 ### Setup
 
-1. Clone the rep into the VM:
+1. Clone the repository into the VM:
+
 ```bash
 git clone git@github.com:alex-henriques/Inception.git
 cd Inception
 ```
 
 2. Create the secrets directory and files:
+
 ```bash
 mkdir -p secrets
 echo "<db_password>" > secrets/db_pass.txt
@@ -60,6 +62,7 @@ echo "<admin_password>" > secrets/credentials.txt
 ```
 
 3. Create 'srcs/.env':
+
 ```bash
 cat > srcs/.env << 'ENVEOF'
 DOMAIN_NAME=alehenri42
@@ -74,11 +77,13 @@ ENVEOF
 ```
 
 4. Add the domain to '/etc/hosts':
+
 ```bash
 echo "127.0.0.1 alehenri.42.fr" | sudo tee -a /etc/hosts
 ```
 
 5. Build and start:
+
 ```bash
 make
 ```
@@ -105,4 +110,4 @@ make
 
 ### AI usage
 
-Claude Anthropic was used during this project for explaining some Docker concepts like volumes, networking, and PID1 behaviour; explaining php-fpm process management configuration and a bit of Docker Compose.
+Claude AI was used during this project for explaining some Docker concepts like volumes, networking, and PID1 behaviour; explaining php-fpm process management configuration and a bit of Docker Compose.

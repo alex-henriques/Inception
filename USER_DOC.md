@@ -12,7 +12,7 @@ This infraestructure runs a Wordpress website accessible at 'https://alehenri.42
 ```bash
 make
 ```
-After doing 'make' we wait about 30 seconds for all containers to initialise, then we visit: https://alehenri.42.fr.
+After doing 'make' we wait for all containers to initialise, then we visit: https://alehenri.42.fr.
 The browser will give off a warning about an untrusted certificate and that's expected because a self-signed certificate was used, ie, it's not signed by CA (Certificate Authority).
 
 ## Stopping the project
@@ -29,15 +29,19 @@ make fclean
 
 ## Accessing the website
 
+```
 -> 'https://alehenri.42.fr': public WP site;
 -> 'https://alehenri.42.fr/wp-admin': WP administration panel.
+```
 
 ## Credentials
 
 Passwords are stored in the 'secrets/' directory at the project root; this directory is not committed to git and must be created manually on each machine.
+```
 -> 'secrets/db_pass.txt': WP database user password;
 -> 'secrets/root_db_pass.txt': MariaDB root password;
 -> 'secrets/credentials.txt': WP admin password.
+```
 The WordPress admin username is defined in 'srcs/.env' as 'WP_ADMIN_USER'.
 
 ## Checking that services are running
@@ -52,7 +56,8 @@ All three services should show status 'running'. If any of them shows 'exited' t
 make logs
 ```
 
-To check a spcific service:
+To check a specific service:
+
 ```bash
 docker compose -f srcs/docker-compose.yml logs mariadb
 docker compose -f srcs/docker-compose.yml logs wordpress
