@@ -44,12 +44,6 @@ WP_USER_EMAIL=visitor@alehenri.42.fr
 ENVEOF
 ```
 
-### 4. Configure /etc/hosts
-
-```bash
-echo "127.0.0.1 alehenri.42.fr" | sudo tee -a /etc/hosts
-```
-
 ## Building & Launching
 
 ```bash
@@ -78,8 +72,34 @@ docker exec -it wordpress sh
 docker exec -it mariadb sh
 docker exec -it nginx sh
 # Connect to MariaDB directly
-docker exec -it mriadb mysql -u root -p
+docker exec -it mariadb mysql -u root -p
 ```
+
+## Accessing the WebSite
+
+42 Machines don't allow sudo access, so '/etc/hosts' can't be edited. To resolve this we'll have to use the browser's built-in DNS override flag instead.
+The VM's IP address might change between reboots depending on the VM's network configuration (NAT/DHCP). Always check before launching the browser.
+
+### 1. Get the VM's IP address
+
+Inside the VM:
+ ```bash
+ ip a
+ ```
+Look for the IP on the active network interface (e.g. '10.x.x.x)
+
+### 2. Launch the browser with a DNS override
+
+From the host machine (not the VM), run one of the following, replacing 10.x.x.x with one of the following:
+-> brave-browser --host -resolver-rules="MAP alehenri.42.fr 10.x.x.x" https://alehenri.42.fr
+-> chromium --host -resolver-rules="MAP alehenri.42.fr 10.x.x.x" https://alehenri.42.fr
+-> google-chrome --host -resolver-rules="MAP alehenri.42.fr 10.x.x.x" https://alehenri.42.fr
+
+### 3. Verification
+
+- 'https://alehenri.42.fr' should load the WP site correctly
+- 'http://alehenri.42.fr' (port 80) should fail to connect. (NGINX only listens on port 443)
+
 
 ## Managing Volumes
 
