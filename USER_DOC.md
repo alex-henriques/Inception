@@ -18,11 +18,13 @@ The browser will give off a warning about an untrusted certificate and that's ex
 ## Stopping the project
 
 -> Stop containers but keep all data:
+
 ```bash
 make down
 ```
 
 -> Full reset (deletes all data and images):
+
 ```bash
 make fclean
 ```
@@ -37,17 +39,15 @@ make fclean
 ## Credentials
 
 Passwords are stored in the 'secrets/' directory at the project root; this directory is not committed to git and must be created manually on each machine.
-```
 -> 'secrets/db_pass.txt': WP database user password;
 -> 'secrets/root_db_pass.txt': MariaDB root password;
 -> 'secrets/credentials.txt': WP admin password.
-```
 The WordPress admin username is defined in 'srcs/.env' as 'WP_ADMIN_USER'.
 
 ## Checking that services are running
 
 ```bash
-docker compose -f srcs/docker-compose.yml ps
+docker compose  -p inception -f srcs/docker-compose.yml ps
 ```
 
 All three services should show status 'running'. If any of them shows 'exited' then we check the logs:

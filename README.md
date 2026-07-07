@@ -65,7 +65,7 @@ echo "<admin_password>" > secrets/credentials.txt
 
 ```bash
 cat > srcs/.env << 'ENVEOF'
-DOMAIN_NAME=alehenri42
+DOMAIN_NAME=alehenri.42.fr
 MYSQL_DATABASE=wordpress
 MYSQL_USER=wpuser
 WP_TITLE=Inception
@@ -76,11 +76,15 @@ WP_USER_EMAIL=visitor@alehenri.42.fr
 ENVEOF
 ```
 
-4. Add the domain to '/etc/hosts':
+4. Point the domain to the VM:
+
+- On a machine with 'sudo" access, add it to '/etc/hosts':
 
 ```bash
 echo "127.0.0.1 alehenri.42.fr" | sudo tee -a /etc/hosts
 ```
+
+- On a 42 machine (no access to 'sudo'), use the browser DNS override - see DEV_DOC.md, "Accessing the Website"
 
 5. Build and start:
 
@@ -95,7 +99,7 @@ make
 -> 'make':		  create data directories, build images, and start containers;
 -> 'make down':   stop and remove containers but keep volumes;
 -> 'make clean':  stop containers, remove volumes, and host data;
--> 'make fclean': all of the above plus remove all Docker images;
+-> 'make fclean': all of the above plus remove this project's own Docker Images (see note in DEV_DOC.md);
 -> 'make re': 	  full rebuild from scratch;
 -> 'make logs':   stream logs from all containers.
 

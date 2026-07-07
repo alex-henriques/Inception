@@ -33,7 +33,7 @@ echo "<admin_password>" > secrets/credentials.txt
 
 ```bash
 cat > srcs/.env << 'ENVEOF'
-DOMAIN_NAME=alehenri42
+DOMAIN_NAME=alehenri.42.fr
 MYSQL_DATABASE=wordpress
 MYSQL_USER=wpuser
 WP_TITLE=Inception
@@ -52,9 +52,11 @@ make
 This will:
 -> Create '/home/alehenri/data/mysql' and '/home/alehenri/data/wordpress' on the host;
 -> Build all three Docker images from their Dockerfiles;
--> Start all containers in detached mode.
+-> Start all containers in detached mode, under the name 'inception'.
 
 First build can take 2 to 3 minutes; following builds are faster due to layer caching.
+
+The project name flag '-p inception' must always be apassed to any manual 'docker compose' command. The Makefile always uses it internally, and every command below as well; omitting it will not give out an error but it will not give the right information.
 
 ## Managing Containers
 
@@ -83,6 +85,7 @@ The VM's IP address might change between reboots depending on the VM's network c
 ### 1. Get the VM's IP address
 
 Inside the VM:
+
  ```bash
  ip a
  ```
@@ -129,6 +132,8 @@ make clean
 make
 ```
 
+Note: 'make fclean' does the same as 'make clean', plus removes this project's own Docker images. It doesn't touch images belonging to other projects, but it's advisable not to run 'make fclean' before an evaluation because it wipes the WP database and forces a full rebuild from scratch, which takes a few minutes.
+
 ## Project Structure
 
 Inception/
@@ -153,5 +158,6 @@ Inception/
 ├── Dockerfile
 ├── conf/nginx.conf
 └── tools/generate_cert.sh
+
 
 EOF

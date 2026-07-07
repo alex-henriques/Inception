@@ -18,7 +18,7 @@ clean: down
 	@sudo rm -rf $(DATA_DIR)/wordpress
 
 fclean: clean
-	@docker system prune -af
+	@docker compose -p $(PROJECT_NAME) -f $(COMPOSE_FILE) down --rmi all
 
 re: fclean all
 
