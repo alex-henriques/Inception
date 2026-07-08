@@ -134,30 +134,4 @@ make
 
 Note: 'make fclean' does the same as 'make clean', plus removes this project's own Docker images. It doesn't touch images belonging to other projects, but it's advisable not to run 'make fclean' before an evaluation because it wipes the WP database and forces a full rebuild from scratch, which takes a few minutes.
 
-## Project Structure
-
-Inception/
-├── Makefile
-├── .gitignore
-├── README.md
-├── USER_DOC.md
-├── DEV_DOC.md
-└── srcs/
-├── .env (not in git)
-├── docker-compose.yml
-└── requirements/
-├── mariadb/
-│ ├── Dockerfile
-│ ├── conf/my.cnf
-│ └── tools/setup_db.sh
-├── wordpress/
-│ ├── Dockerfile
-│ ├── conf/www.conf
-│ └── tools/setup_wordpress.sh
-└── nginx/
-├── Dockerfile
-├── conf/nginx.conf
-└── tools/generate_cert.sh
-
-
 EOF

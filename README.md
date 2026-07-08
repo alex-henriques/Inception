@@ -56,9 +56,9 @@ cd Inception
 
 ```bash
 mkdir -p secrets
-echo "<db_password>" > secrets/db_pass.txt
-echo "<root_db_password>" > secrets/db_root_pass.txt
-echo "<admin_password>" > secrets/credentials.txt
+echo "db_pass" > secrets/db_pass.txt
+echo "root_db_pass" > secrets/db_root_pass.txt
+echo "admin_pass" > secrets/credentials.txt
 ```
 
 3. Create 'srcs/.env':
