@@ -70,9 +70,9 @@ docker compose -f srcs/docker-compose.yml restart wordpress
 # Rebuild and restart a single service
 docker compose -f srcs/docker-compose.yml up -d --build wordpress
 # Open a shell inside a running container
-docker exec -it wordpress sh
-docker exec -it mariadb sh
-docker exec -it nginx sh
+docker exec -it inception-wordpress-1 sh
+docker exec -it inception-mariadb-1 sh
+docker exec -it inception-nginx-1 sh
 # Connect to MariaDB directly
 docker exec -it mariadb mysql -u root -p
 ```
@@ -82,25 +82,31 @@ docker exec -it mariadb mysql -u root -p
 42 Machines don't allow sudo access, so '/etc/hosts' can't be edited. To solve this we need to use the DNS override flag instead.
 The VM's IP address might change between reboots depending on the VM's network configuration (NAT/DHCP). Always check before launching the browser.
 
-### 1. Get the VM's IP address
+### 1. Point the domain to the VM (access to 'sudo'):
 
-Inside the VM:
+- On a machine with 'sudo" access, add it to '/etc/hosts':
+
+```bash
+echo "127.0.0.1 alehenri.42.fr" | sudo tee -a /etc/hosts
+```
+
+### 2. Launch the browser with a DNS override (no access to 'sudo')
+
+-> Inside the VM:
 
  ```bash
  ip a
  ```
 Look for the IP on the active network interface (e.g. '10.x.x.x)
 
-### 2. Launch the browser with a DNS override
-
-From the host machine (not the VM), run one of the following, replacing 10.x.x.x with one of the following:
+-> From the host machine (not the VM), run one of the following, replacing 10.x.x.x with one of the following:
 ```
 -> brave-browser --host-resolver-rules="MAP alehenri.42.fr 10.x.x.x" https://alehenri.42.fr
 -> chromium --host-resolver-rules="MAP alehenri.42.fr 10.x.x.x" https://alehenri.42.fr
 -> google-chrome --host-resolver-rules="MAP alehenri.42.fr 10.x.x.x" https://alehenri.42.fr
 ```
 
-### 3. Verification
+### 4. Go to Website
 
 - 'https://alehenri.42.fr' should load the WP site correctly
 - 'http://alehenri.42.fr' (port 80) should fail to connect. (NGINX only listens on port 443)

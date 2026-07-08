@@ -43,56 +43,19 @@ Bind Mounts map a specific host directory path into a container; simple but less
 -> 'make' installed;
 -> The user added to the 'docker' group.
 
-### Setup
+### Quick start
 
-1. Clone the repository into the VM:
+1. Clone the repository into the VM, build and start:
 
 ```bash
 git clone git@github.com:alex-henriques/Inception.git
 cd Inception
-```
-
-2. Create the secrets directory and files:
-
-```bash
-mkdir -p secrets
-echo "db_pass" > secrets/db_pass.txt
-echo "root_db_pass" > secrets/db_root_pass.txt
-echo "admin_pass" > secrets/credentials.txt
-```
-
-3. Create 'srcs/.env':
-
-```bash
-cat > srcs/.env << 'ENVEOF'
-DOMAIN_NAME=alehenri.42.fr
-MYSQL_DATABASE=wordpress
-MYSQL_USER=wpuser
-WP_TITLE=Inception
-WP_ADMIN_USER=alehenri
-WP_ADMIN_EMAIL=alehenri@student.42luxembourg.lu
-WP_USER=visitor
-WP_USER_EMAIL=visitor@alehenri.42.fr
-ENVEOF
-```
-
-4. Point the domain to the VM:
-
-- On a machine with 'sudo" access, add it to '/etc/hosts':
-
-```bash
-echo "127.0.0.1 alehenri.42.fr" | sudo tee -a /etc/hosts
-```
-
-- On a 42 machine (no access to 'sudo'), use the browser DNS override - see DEV_DOC.md, "Accessing the Website"
-
-5. Build and start:
-
-```bash
 make
 ```
 
-6. Visit 'https://alehenri.42.fr' in a browser and accept the certificate warning.
+This is assuming 'secrets/' and 'srcs/.env' are already created. For a full setup from a fresh VM, creating secrets, .env file, and accessing the website without 'sudo' - see DEV_DOC.md.
+
+2. Visit 'https://alehenri.42.fr' in a browser and accept the certificate warning.
 
 ### Makefile commands
 

@@ -3,7 +3,7 @@
 ## What this stack provides
 
 This infraestructure runs a Wordpress website accessible at 'https://alehenri.42.fr' and consists of three services:
--> NGINX:     handles all incoming HTTPS traffic on port 442;
+-> NGINX:     handles all incoming HTTPS traffic on port 443;
 -> WordPress: runs the website and admin panel;
 -> MariaDB:   stores all website data.
 
