@@ -95,9 +95,9 @@ Look for the IP on the active network interface (e.g. '10.x.x.x)
 
 From the host machine (not the VM), run one of the following, replacing 10.x.x.x with one of the following:
 ```
--> brave-browser --host -resolver-rules="MAP alehenri.42.fr 10.x.x.x" https://alehenri.42.fr
--> chromium --host -resolver-rules="MAP alehenri.42.fr 10.x.x.x" https://alehenri.42.fr
--> google-chrome --host -resolver-rules="MAP alehenri.42.fr 10.x.x.x" https://alehenri.42.fr
+-> brave-browser --host-resolver-rules="MAP alehenri.42.fr 10.x.x.x" https://alehenri.42.fr
+-> chromium --host-resolver-rules="MAP alehenri.42.fr 10.x.x.x" https://alehenri.42.fr
+-> google-chrome --host-resolver-rules="MAP alehenri.42.fr 10.x.x.x" https://alehenri.42.fr
 ```
 
 ### 3. Verification
