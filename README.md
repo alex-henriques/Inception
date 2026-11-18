@@ -4,12 +4,12 @@
 
 ## Description
 
-Inception is a system administration. The goal is to set up a small infraestructure composed of three services orchestrated with Docker Compose, running inside of a  virtual machine.
+Inception is a system administration project. The goal is to set up a small infrastructure composed of three services orchestrated with Docker Compose, running inside of a  virtual machine.
 
-The infraestructure consists of:
--> NGINX: the only entry point, listening on port 443 with TLSv1.2/TLSv1.3;
--> Wordpress & php-fpm: the web application running without NGINX;
--> MariaDB: the database, also running without NGINX.
+The infrastructure consists of:
+- NGINX: the only entry point, listening on port 443 with TLSv1.2/TLSv1.3;
+- Wordpress & php-fpm: the web application running without NGINX;
+- MariaDB: the database, also running without NGINX.
 
 Each service runs in its own dedicated container built from Alpine 3.19. All images are built from scratch. 
 
@@ -19,7 +19,7 @@ A VM emulates an entire computer including its own Kernel, hardware drivers, and
 
 ### Secrets vs Environment Variables
 
-Docker secrets are mounted as files at 'run/secrets<name>' inside containers at runtime. They never appear in image layers or 'docker inspect' output. Passwords and other sensitive information belong in secrets.
+Docker secrets are mounted as files at 'run/secrets/<name>' inside containers at runtime. They never appear in image layers or 'docker inspect' output. Passwords and other sensitive information belong in secrets.
 
 Environment Variables, stored in '.env', are suitable for non sensitive configuration like database names, domain names, and usernames. They're visible in 'docker inspect' output and image layers.
 
@@ -39,9 +39,9 @@ Bind Mounts map a specific host directory path into a container; simple but less
 
 ### Prerequisites
 
--> Linux VM with Docker and Docker Compose V2 installed;
--> 'make' installed;
--> The user added to the 'docker' group.
+- Linux VM with Docker and Docker Compose V2 installed;
+- 'make' installed;
+- The user added to the 'docker' group.
 
 ### Quick start
 
@@ -59,21 +59,21 @@ This is assuming 'secrets/' and 'srcs/.env' are already created. For a full setu
 
 ### Makefile commands
 
--> 'make':		  create data directories, build images, and start containers;
--> 'make down':   stop and remove containers but keep volumes;
--> 'make clean':  stop containers, remove volumes, and host data;
--> 'make fclean': all of the above plus remove this project's own Docker Images (see note in DEV_DOC.md);
--> 'make re': 	  full rebuild from scratch;
--> 'make logs':   stream logs from all containers.
+- 'make':		  create data directories, build images, and start containers;
+- 'make down':   stop and remove containers but keep volumes;
+- 'make clean':  stop containers, remove volumes, and host data;
+- 'make fclean': all of the above plus remove this project's own Docker Images (see note in DEV_DOC.md);
+- 'make re': 	  full rebuild from scratch;
+- 'make logs':   stream logs from all containers.
 
 ## Resources
 
--> Docker documentation: https://docs.docker.com;
--> Docker Compose: https://docs.docker.com/compose/compose-file/;
--> NGINX documentation: https://nginx.org/en/docs/;
--> PHP-FPM configuration: https://www.php.net/manual/en/install.fpm.configuration.php;
--> MariaDB documentation: https://mariadb.com/kb/en/documentation/;
--> WP-CLI documentation: https://wp-cli.org/.
+- Docker documentation: https://docs.docker.com;
+- Docker Compose: https://docs.docker.com/compose/compose-file/;
+- NGINX documentation: https://nginx.org/en/docs/;
+- PHP-FPM configuration: https://www.php.net/manual/en/install.fpm.configuration.php;
+- MariaDB documentation: https://mariadb.com/kb/en/documentation/;
+- WP-CLI documentation: https://wp-cli.org/.
 
 ### AI usage
 
