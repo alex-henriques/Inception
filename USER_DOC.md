@@ -40,7 +40,7 @@ make fclean
 
 Passwords are stored in the 'secrets/' directory at the project root; this directory is not committed to git and must be created manually on each machine.
 -> 'secrets/db_pass.txt': WP database user password;
--> 'secrets/db_root_db_pass.txt': MariaDB root password;
+-> 'secrets/db_root_pass.txt': MariaDB root password;
 -> 'secrets/credentials.txt': WP admin password.
 The WordPress admin username is defined in 'srcs/.env' as 'WP_ADMIN_USER'.
 
